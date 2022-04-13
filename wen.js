@@ -10,9 +10,10 @@ class Producto {
         this.precio = precio;
     }
 }
-let carrito = [];
-let stock = [];
-total
+
+let carrito = []; // paquete
+let stock = []; // hoteles
+
 const tabla = document.getElementById("items");
 const agregar = document.querySelector("#agregar");
 const aumentar = document.querySelector("#aumentar");
@@ -58,9 +59,11 @@ function newRow(item) {
 
     aux = document.createElement("th");
     aux.innerText = item.cantidad;
+
     const suma = document.createElement("button");
     suma.className = "btn btn-primary";
     suma.innerText = "+";
+
     const resta = document.createElement("button");
     resta.className = "btn btn-primary";
     resta.innerText = "-";
@@ -69,6 +72,7 @@ function newRow(item) {
         carrito[pos].cantidad++;
         listadoUpdate();
     };
+    
     resta.onclick = () => {
         if (carrito[pos].cantidad > 0) {
             carrito[pos].cantidad--;
@@ -80,23 +84,27 @@ function newRow(item) {
     aux.append(suma);
 
     row.append(aux);
+
     aux = document.createElement("th");
-    aux.innerText = item.producto.precio;
+    aux.innerText = item.producto.precio * item.cantidad;
     row.append(aux);
+    
     const eliminarBtn = document.createElement("button");
     eliminarBtn.className = "btn btn-danger";
     eliminarBtn.innerText = "Eliminar";
     eliminarBtn.onclick = () => {
         carrito.splice(pos, 1);
-        listadoUpdate();
+        listadoUpdate(); 
     };
 
-    items
     const th = document.createElement("th");
+
     th.append(eliminarBtn);
     row.append(th);
     tabla.append(row);
+
     const total = document.getElementById("total");
+
     total.innerText = carrito.reduce(
         (total, item) => total + item.producto.precio * item.cantidad,
         0

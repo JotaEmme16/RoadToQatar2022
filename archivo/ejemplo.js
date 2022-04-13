@@ -24,8 +24,8 @@ class Excursiones{
     }
 }
 class Seguro{
-    constructor(nombre, precio){
-        this.nombre = nombre;
+    constructor(medico, precio){
+        this.medico = medico;
         this.precio = precio;
     }
 }
@@ -98,28 +98,84 @@ partidos.forEach((excursiones) => {
 const seguroitem = document.getElementById("seguro");
 asistencia.forEach((seguro) => {
     const option = document.createElement("option");
-    option.innerText = `${seguro.nombre} - US$${seguro.precio}`;
+    option.innerText = `${seguro.medico} - US$${seguro.precio}`;
     option.value = asistencia.indexOf(seguro);
     seguroitem.append(option);
 });
 
 // PARÁMETROS EN EL HTML
-const tabla = document.getElementById("paquetefinal");
-const agregar = document.getElementsByClassName("agregar");
+const tabla = document.getElementById("items");
+const agregar = document.getElementById("agregar");
 const vaciar = document.getElementById("vaciar");
 
 // MODIFICADORES DE LAS OPCIONES
-const hospedaje = parseInt(document.getElementById("hospedaje").value);
-
+const hospedaje = document.getElementById("hospedaje");
 const pasasejos = parseInt(document.getElementById("pasajeros").value);
-
 const dias = parseInt(document.getElementById("uso").value);
-
 const paxexcursion = parseInt(document.getElementById("paxexcursion").value);
-
 const paxasistencia = parseInt(document.getElementById("paxasistencia").value);
 const diasviaje = parseInt(document.getElementById("diasviaje").value);
 
 // ARRAY GENERAL
 const paquete = [];
 
+// FUNCIONES
+function nuevafila(item){
+    const fila = document.createElement("tr");
+    const ver = paquete.indexOf(item);
+
+    let columna = document.createElement("th");
+    columna.innerText = item.nombre.nombre;
+    fila.append(columna);
+
+    columna = document.createElement("th");
+    columna.innerText = item.nombre.precio;
+    fila.append(columna);
+
+    const botoneliminar = document.createElement("button");
+    botoneliminar.className = "btn btn-danger";
+    botoneliminar.innerText = "Borrar";
+    botoneliminar.onclick = () => {
+        paquete.splice(ver, 1);
+        actualizacion(); 
+    };
+
+    const th = document.createElement("th");
+
+    th.append(botoneliminar);
+    fila.append(th);
+    tabla.append(fila);
+
+    const total = document.getElementById("total");
+    total.innerText = paquete.reduce(
+        (total, item) => total + item.nombre.precio, 0);
+};
+
+function actualizacion(){
+    tabla.innerHTML = "";
+    paquete.forEach((item) => {
+        nuevafila(item)
+    });
+    total.innerText = paquete.reduce(
+        (total, item) => total + item.nombre.precio * hospedaje, 0);
+};
+
+agregar.addEventListener("submit", (e) => {
+    e.preventDefault();
+    let alojamiento = hoteles[alojamientoitem.value];
+    if (
+        typeof paquete.find(
+            (el) => el.nombre.nombre == hoteles[alojamientoitem.value].nombre) === "undefined");
+    {
+        let nuevoElemento = new Alojamiento(alojamiento);
+        paquete.push(nuevoElemento);
+        nuevafila(nuevoElemento);
+    }
+});
+
+vaciar.onclick = () => {
+    paquete = [];
+    actualizacion();
+};
+
+actualizacion();
