@@ -107,6 +107,7 @@ asistencia.forEach((seguro) => {
 // PARÁMETROS EN EL HTML
 const tabla = document.getElementById("items");
 const agregaralojamiento = document.getElementById("agregaralojamiento");
+const hospedaje = document.getElementById("hospedaje").innerHTML;
 const vaciar = document.getElementById("vaciar");
 
 // ARRAY GENERAL
