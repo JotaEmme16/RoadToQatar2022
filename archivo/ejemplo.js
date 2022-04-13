@@ -106,7 +106,7 @@ asistencia.forEach((seguro) => {
 
 // PARÁMETROS EN EL HTML
 const tabla = document.getElementById("items");
-const agregar = document.getElementById("agregar");
+const agregaralojamiento = document.getElementById("agregaralojamiento");
 const vaciar = document.getElementById("vaciar");
 
 // ARRAY GENERAL
@@ -153,7 +153,7 @@ function actualizacion(){
         (total, item) => total + item.nombre.precio, 0);
 };
 
-agregar.addEventListener("submit", (e) => {
+agregaralojamiento.addEventListener("submit", (e) => {
     e.preventDefault();
     let alojamiento = hoteles[alojamientoitem.value];
     if (
