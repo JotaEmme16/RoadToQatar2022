@@ -1,7 +1,8 @@
 // CLASES
 class Alojamiento{
-    constructor(nombre, precio){
+    constructor(nombre, cantidad, precio){
         this.nombre = nombre;
+        this.cantidad = cantidad;
         this.precio = precio;
     }
 }
@@ -32,11 +33,11 @@ class Seguro{
 
 // OPCIONES PARA ELEGIR
 const hoteles = [];
-hoteles.push(new Alojamiento("Hilton", 5000));
-hoteles.push(new Alojamiento("Intercontinental", 4000));
-hoteles.push(new Alojamiento("Kingsdate Doha", 4200));
-hoteles.push(new Alojamiento("Plaza Doha", 3700));
-hoteles.push(new Alojamiento("Al Messila", 2500));
+hoteles.push(new Alojamiento("Hilton", 1, 5000));
+hoteles.push(new Alojamiento("Intercontinental", 1, 4000));
+hoteles.push(new Alojamiento("Kingsdate Doha", 1, 4200));
+hoteles.push(new Alojamiento("Plaza Doha", 1, 3700));
+hoteles.push(new Alojamiento("Al Messila", 1, 2500));
 
 const aereos = [];
 aereos.push(new Vuelos("Buenos Aires", 1000));
@@ -108,14 +109,6 @@ const tabla = document.getElementById("items");
 const agregar = document.getElementById("agregar");
 const vaciar = document.getElementById("vaciar");
 
-// MODIFICADORES DE LAS OPCIONES
-const hospedaje = document.getElementById("hospedaje");
-const pasasejos = parseInt(document.getElementById("pasajeros").value);
-const dias = parseInt(document.getElementById("uso").value);
-const paxexcursion = parseInt(document.getElementById("paxexcursion").value);
-const paxasistencia = parseInt(document.getElementById("paxasistencia").value);
-const diasviaje = parseInt(document.getElementById("diasviaje").value);
-
 // ARRAY GENERAL
 const paquete = [];
 
@@ -157,7 +150,7 @@ function actualizacion(){
         nuevafila(item)
     });
     total.innerText = paquete.reduce(
-        (total, item) => total + item.nombre.precio * hospedaje, 0);
+        (total, item) => total + item.nombre.precio, 0);
 };
 
 agregar.addEventListener("submit", (e) => {
