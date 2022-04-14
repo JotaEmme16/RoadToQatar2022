@@ -106,12 +106,17 @@ asistencia.forEach((seguro) => {
 // PARÁMETROS EN EL HTML
 const tabla = document.getElementById("items");
 const agregaralojamiento = document.getElementById("agregaralojamiento");
+const agregarvuelo = document.getElementById("agregarvuelo");
+const agregaralquiler = document.getElementById("agregaralquiler");
+const agregarentradas = document.getElementById("agregarentradas");
+const agregarseguro = document.getElementById("agregarseguro");
 const vaciar = document.getElementById("vaciar");
 
 // ARRAY GENERAL
 const paquete = [];
 
 // FUNCIONES
+// ALOJAMIENTO
 function nuevafila(item){
     const fila = document.createElement("tr");
     const ver = paquete.indexOf(item);
