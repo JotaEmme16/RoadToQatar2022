@@ -1,8 +1,7 @@
 // CLASES
 class Alojamiento{
-    constructor(nombre, cantidad, precio){
+    constructor(nombre, precio){
         this.nombre = nombre;
-        this.cantidad = cantidad;
         this.precio = precio;
     }
 }
@@ -33,11 +32,11 @@ class Seguro{
 
 // OPCIONES PARA ELEGIR
 const hoteles = [];
-hoteles.push(new Alojamiento("Hilton", 1, 5000));
-hoteles.push(new Alojamiento("Intercontinental", 1, 4000));
-hoteles.push(new Alojamiento("Kingsdate Doha", 1, 4200));
-hoteles.push(new Alojamiento("Plaza Doha", 1, 3700));
-hoteles.push(new Alojamiento("Al Messila", 1, 2500));
+hoteles.push(new Alojamiento("Hilton", 5000));
+hoteles.push(new Alojamiento("Intercontinental", 4000));
+hoteles.push(new Alojamiento("Kingsdate Doha", 4200));
+hoteles.push(new Alojamiento("Plaza Doha", 3700));
+hoteles.push(new Alojamiento("Al Messila", 2500));
 
 const aereos = [];
 aereos.push(new Vuelos("Buenos Aires", 1000));
@@ -107,7 +106,6 @@ asistencia.forEach((seguro) => {
 // PARÁMETROS EN EL HTML
 const tabla = document.getElementById("items");
 const agregaralojamiento = document.getElementById("agregaralojamiento");
-const hospedaje = document.getElementById("hospedaje").innerHTML;
 const vaciar = document.getElementById("vaciar");
 
 // ARRAY GENERAL
@@ -123,7 +121,8 @@ function nuevafila(item){
     fila.append(columna);
 
     columna = document.createElement("th");
-    columna.innerText = item.nombre.precio;
+    let hospedaje = document.getElementById("hospedaje").value;
+    columna.innerText = item.nombre.precio * hospedaje;
     fila.append(columna);
 
     const botoneliminar = document.createElement("button");
@@ -142,7 +141,7 @@ function nuevafila(item){
 
     const total = document.getElementById("total");
     total.innerText = paquete.reduce(
-        (total, item) => total + item.nombre.precio, 0);
+        (total, item) => total + item.nombre.precio * hospedaje, 0);
 };
 
 function actualizacion(){
