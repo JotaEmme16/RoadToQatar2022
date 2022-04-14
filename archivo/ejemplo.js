@@ -177,3 +177,65 @@ vaciar.onclick = () => {
 };
 
 actualizacion();
+
+// VUELOS
+function nuevafilavuelos(item){
+    const fila = document.createElement("tr");
+    const ver = paquete.indexOf(item);
+
+    let columna = document.createElement("th");
+    columna.innerText = item.desde.desde;
+    fila.append(columna);
+
+    columna = document.createElement("th");
+    let pasajeros = document.getElementById("pasajeros").value;
+    columna.innerText = item.desde.precio * pasajeros;
+    fila.append(columna);
+
+    const botoneliminar = document.createElement("button");
+    botoneliminar.className = "btn btn-danger";
+    botoneliminar.innerText = "Borrar";
+    botoneliminar.onclick = () => {
+        paquete.splice(ver, 1);
+        actualizacionvuelos(); 
+    };
+
+    const th = document.createElement("th");
+
+    th.append(botoneliminar);
+    fila.append(th);
+    tabla.append(fila);
+
+    const total = document.getElementById("total");
+    total.innerText = paquete.reduce(
+        (total, item) => total + item.desde.precio * pasajeros, 0);
+};
+
+function actualizacionvuelos(){
+    tabla.innerHTML = "";
+    paquete.forEach((item) => {
+        nuevafilavuelos(item)
+    });
+    total.innerText = paquete.reduce(
+        (total, item) => total + item.desde.precio, 0);
+};
+
+agregarvuelo.addEventListener("submit", (e) => {
+    e.preventDefault();
+    let avion = aereos[aereositem.value];
+    if (
+        typeof paquete.find(
+            (el) => el.desde.desde == aereos[aereositem.value].desde) === "undefined");
+    {
+        let nuevoAvion = new Vuelos(avion);
+        paquete.push(nuevoAvion);
+        nuevafilavuelos(nuevoAvion);
+    }
+});
+
+vaciar.onclick = () => {
+    paquete = [];
+    actualizacionvuelos();
+};
+
+actualizacionvuelos();
