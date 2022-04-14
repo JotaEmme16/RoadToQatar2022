@@ -113,7 +113,7 @@ const agregarseguro = document.getElementById("agregarseguro");
 const vaciar = document.getElementById("vaciar");
 
 // ARRAY GENERAL
-const paquete = [];
+let paquete = [];
 
 // FUNCIONES
 // ALOJAMIENTO
@@ -183,14 +183,14 @@ function nuevafilavuelos(item){
     const fila = document.createElement("tr");
     const ver = paquete.indexOf(item);
 
-    let columna = document.createElement("th");
-    columna.innerText = item.desde.desde;
-    fila.append(columna);
+    let columnav = document.createElement("th");
+    columnav.innerText = item.desde.desde;
+    fila.append(columnav);
 
-    columna = document.createElement("th");
+    columnav = document.createElement("th");
     let pasajeros = document.getElementById("pasajeros").value;
-    columna.innerText = item.desde.precio * pasajeros;
-    fila.append(columna);
+    columnav.innerText = item.desde.precio * pasajeros;
+    fila.append(columnav);
 
     const botoneliminar = document.createElement("button");
     botoneliminar.className = "btn btn-danger";
